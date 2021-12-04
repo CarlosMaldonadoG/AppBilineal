@@ -16,7 +16,7 @@ export class ImageLocal implements ImageOp {
     
     this.readyToDraw = ready;
     this.isScaled = false;
-    this.drawSmallImg = this.drawSmallImg.bind(this);
+    
     this.handleFileSelect = this.handleFileSelect.bind(this);  
     this.onload = this.onload.bind(this);  
   }
@@ -47,41 +47,6 @@ export class ImageLocal implements ImageOp {
     this.onload();
   }
 
-  public drawSmallImg(evt:any):void{
-    let xPos:number = evt.offsetX-2;
-    let yPos: number = evt.offsetY - 2;
-    //console.log(xPos, yPos);
-    let pixel:ImageData = this.screen.getImageData(xPos, yPos, 1, 1);
-       
-    if (this.readyToDraw) {    
-      if (this.isScaled) {
-        xPos *= (this.img.width/DefaultSettings.SIZE_WIDTH);
-        yPos *= (this.img.height/DefaultSettings.SIZE_HEIGHT);
-        
-      }
-      this.screen.clearRect(0, 0, DefaultSettings.SIZE_WIDTH, DefaultSettings.SIZE_HEIGHT);
-      this.screen.strokeStyle = "lightgray";
-      
-      this.screen.imageSmoothingEnabled = false;
-      this.isScaled ?
-          this.screen.drawImage(this.img, 0, 0, DefaultSettings.SIZE_WIDTH, DefaultSettings.SIZE_HEIGHT)
-        : this.screen.drawImage(this.img, 0, 0, this.img.width, this.img.height);
-      
-      this.screen.strokeRect(evt.offsetX+5, evt.offsetY+5,  DefaultSettings.SMALL_W,DefaultSettings.SMALL_H);
-      this.screen.drawImage(this.img, Math.floor(xPos - 3), Math.floor(yPos - 3), 5, 5, evt.offsetX + 5, evt.offsetY + 5, DefaultSettings.SMALL_W, DefaultSettings.SMALL_H);
-      
-      let color:HTMLElement = document.getElementById('color');
-      
-      let data:Uint8ClampedArray = pixel.data;
-      let rgba = 'rgba(' + data[0] + ', ' + data[1] +
-                ', ' + data[2] + ', ' + (data[3] / 255) + ')';
-      color.style.background =  rgba;
-      //color.textContent = rgba;
-     // console.log(xPos);
-      //console.log(yPos);
-      document.getElementById('rgb').innerHTML = '<strong>'+ rgba + '</strong> ';
-    }
-  }
   public getImage():HTMLImageElement{
         return this.img;
   }

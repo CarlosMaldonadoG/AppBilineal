@@ -64,7 +64,7 @@ function puntosRec(evt: any): void{
 
 
 lienzo1.addEventListener("mousedown", puntosRec);
-//lienzo1.addEventListener("mousemove", imgLocal.drawSmallImg);
+
 document.getElementById('files').addEventListener('change', imgLocal.handleFileSelect, false);
 document.getElementById('files2').addEventListener('change', imgLocal4.handleFileSelect, false);
 dropZone.addEventListener('dragover', handleDragOver, false);
