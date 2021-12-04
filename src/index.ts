@@ -10,13 +10,12 @@ let lienzo4: HTMLCanvasElement;
 let pantalla1: CanvasRenderingContext2D;
 let pantalla2: CanvasRenderingContext2D;
 let pantalla4: CanvasRenderingContext2D;
-let arr_Img = new Array();//creo arreglo unidimensional para guardar las posiciones X
-let posImgCv = -1;
-//let arr_numY = new Array();//creo arreglo unidimensional para guardar las posiciones Y
-//let numero1 : number=arr_numX.forEach(elemento,0);
-//let arr_numXY =[[arr_numX],[arr_numY]];//creo arreglo bidimensional para guardar las posiciones X y Y
-let arrayX : number []=[];
-let arrayY : number []=[];
+
+let arr_Img = new Array();//contador donde guardo los estados de la imagen para poder aplicar la funcion de borrar puntos
+let posImgCv = -1;//una variable tipo "contador" para saber en que posion ando, lo ocupo para restablecer la img cuando borro puntos
+let arrayX : number []=[];//variable donde almaceno las posiciones de X
+let arrayY : number []=[];//variable donde almaceno las posiciones de Y
+
 /* Este evento controla la forma de abrir un archivo mediante el evento de arrastrar y soltar */
 function handleDragOver(evt:any) {
     evt.stopPropagation();
@@ -46,17 +45,15 @@ function puntosRec(evt: any): void{
   let posicionX:number = evt.offsetX;
   let posicionY: number = evt.offsetY;
   let groSor = 6;
-  //pantalla1.clearRect(0, 0, 463, 279); para limpiar el canvas al terminar de guardar
-  //pantalla1.clearRect(0, 0, groSor, groSor);                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
+  console.log(arr_Img);
+  console.log(posImgCv);                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               
   pantalla1.fillRect(posicionX,posicionY,groSor,groSor);
   console.log(posicionX);
   console.log(posicionY); 
-  //arr_numX.push(posicionX);
-  //arr_numY.push(posicionY);
   arr_Img.push(pantalla1.getImageData(0, 0, DefaultSettings.SIZE_WIDTH, DefaultSettings.SIZE_HEIGHT));
   posImgCv ++;
-  console.log(arr_Img);
-  console.log(posImgCv);
+  //console.log(arr_Img);
+  //console.log(posImgCv);
   arrayX.push(posicionX);
   arrayY.push(posicionY);
 
@@ -72,17 +69,14 @@ dropZone.addEventListener('drop', imgLocal.handleFileSelect, false);
 
 function bilinealImg(evt: any): void{
  
-  //let data =[[arr_numX],[arr_numY]];
-  /*let data: number[][]= [[55,394,460,1],
-                        [2,2,275,275]];*/
   if(!arrayX.length || !arrayY.length || posImgCv < 3 ){//comprobamos si el arreglo de puntos esta vacio
     alert("Seleccionar los puntos X y Y de la región a ampliar");
-    pantalla1.font ='12px Cambria Math';
+   /* pantalla1.font ='12px Cambria Math';
     pantalla1.fillText('x1, y1', 10,10);
     pantalla1.fillText('X2, Y2', 423,10);
     pantalla1.font ='12px Arial';
     pantalla1.fillText('X3, Y3', 423,269);
-    pantalla1.fillText('X4, Y4', 10,269);
+    pantalla1.fillText('X4, Y4', 10,269);*/
  
    }else{
     var imagenSal: ImageType = new ImageType(pantalla1, imgLocal.getImage());
@@ -92,7 +86,6 @@ function bilinealImg(evt: any): void{
   
 }
 function borrarCanvas(evt: any): void{
-  //pantalla2.clearRect(0, 0, 463, 279);
   posImgCv --;
   arr_Img.pop();
   console.log(arr_Img);
