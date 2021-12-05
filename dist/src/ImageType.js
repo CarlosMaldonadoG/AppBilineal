@@ -11,6 +11,8 @@ var ImageType = /** @class */ (function () {
         else {
             this._width = w;
             this._height = h;
+            console.log(this._height);
+            console.log(this._width);
         }
         this.screenCanvas = sc;
         this.imageData = sc.getImageData(0, 0, this._width, this._height);

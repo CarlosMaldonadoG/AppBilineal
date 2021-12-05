@@ -21,6 +21,9 @@
 ul{
   list-style: none;
 }
+.nab{
+  width: 1200px
+}
 .nav li span{
   background-color: black;
   color: white;

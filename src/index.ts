@@ -6,10 +6,9 @@ import { DefaultSettings } from "./DefaultSettings.js";
 
 let lienzo1: HTMLCanvasElement;
 let lienzo2: HTMLCanvasElement;
-let lienzo4: HTMLCanvasElement;
 let pantalla1: CanvasRenderingContext2D;
 let pantalla2: CanvasRenderingContext2D;
-let pantalla4: CanvasRenderingContext2D;
+
 
 let arr_Img = new Array();//contador donde guardo los estados de la imagen para poder aplicar la funcion de borrar puntos
 let posImgCv = -1;//una variable tipo "contador" para saber en que posion ando, lo ocupo para restablecer la img cuando borro puntos
@@ -30,14 +29,14 @@ lienzo1 = <HTMLCanvasElement>document.getElementById('img1');
 pantalla1 = lienzo1.getContext("2d");
 lienzo2 = <HTMLCanvasElement>document.getElementById('img2');
 pantalla2 = lienzo2.getContext("2d");
-lienzo4 = <HTMLCanvasElement>document.getElementById('img4');
-pantalla4 = lienzo4.getContext("2d");
+//lienzo4 = <HTMLCanvasElement>document.getElementById('img4');
+//pantalla4 = lienzo4.getContext("2d");
 
 var dropZone = lienzo1;//document.getElementById('img1');
 var imgLocal: ImageLocal = new ImageLocal(pantalla1);
 imgLocal.getImage().onload = imgLocal.onload;
-var imgLocal4: ImageLocal = new ImageLocal(pantalla4);
-imgLocal4.getImage().onload = imgLocal4.onload;
+//var imgLocal4: ImageLocal = new ImageLocal(pantalla4);
+//imgLocal4.getImage().onload = imgLocal4.onload;
 
 
 
@@ -63,7 +62,7 @@ function puntosRec(evt: any): void{
 lienzo1.addEventListener("mousedown", puntosRec);
 
 document.getElementById('files').addEventListener('change', imgLocal.handleFileSelect, false);
-document.getElementById('files2').addEventListener('change', imgLocal4.handleFileSelect, false);
+//document.getElementById('files2').addEventListener('change', imgLocal4.handleFileSelect, false);
 dropZone.addEventListener('dragover', handleDragOver, false);
 dropZone.addEventListener('drop', imgLocal.handleFileSelect, false);
 
