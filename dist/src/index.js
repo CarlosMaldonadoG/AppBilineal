@@ -49,6 +49,14 @@ document.getElementById('files').addEventListener('change', imgLocal.handleFileS
 //document.getElementById('files2').addEventListener('change', imgLocal4.handleFileSelect, false);
 dropZone.addEventListener('dragover', handleDragOver, false);
 dropZone.addEventListener('drop', imgLocal.handleFileSelect, false);
+function restableceImg() {
+    if (!arrayX.length || !arrayY.length || posImgCv < 3) { //comprobamos si el arreglo de puntos esta vacio
+        alert("Seleccionar los puntos X y Y de la región a ampliar");
+    }
+    else {
+        pantalla1.putImageData(arr_Img[0], 0, 0);
+    }
+}
 function bilinealImg(evt) {
     if (!arrayX.length || !arrayY.length || posImgCv < 3) { //comprobamos si el arreglo de puntos esta vacio
         alert("Seleccionar los puntos X y Y de la región a ampliar");
@@ -65,9 +73,10 @@ function borrarCanvas() {
 }
 function limpiarCanvas() {
     pantalla1.clearRect(0, 0, DefaultSettings.SIZE_WIDTH, DefaultSettings.SIZE_HEIGHT);
+    pantalla2.clearRect(0, 0, DefaultSettings.SIZE_WIDTH, DefaultSettings.SIZE_HEIGHT);
 }
-//geometrica
+document.getElementById("op-dibPtn").addEventListener('click', dibujarPuntos, false);
 document.getElementById("op-borrarcnv").addEventListener('click', borrarCanvas, false);
 document.getElementById("op-bilineal").addEventListener('click', bilinealImg, false);
 document.getElementById("op-limpiarcanvas").addEventListener('click', limpiarCanvas, false);
-document.getElementById("op-dibPtn").addEventListener('click', dibujarPuntos, false);
+document.getElementById("op-restabImg").addEventListener('click', restableceImg, false);

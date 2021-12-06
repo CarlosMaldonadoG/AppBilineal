@@ -52,19 +52,23 @@ function puntosRec(evt: any): void{
   posImgCv ++;
   arrayX.push(posicionX);
   arrayY.push(posicionY);
-
 }
 
 function dibujarPuntos(){
   lienzo1.addEventListener("mousedown", puntosRec);
 }
-
-
 document.getElementById('files').addEventListener('change', imgLocal.handleFileSelect, false);
 //document.getElementById('files2').addEventListener('change', imgLocal4.handleFileSelect, false);
 dropZone.addEventListener('dragover', handleDragOver, false);
 dropZone.addEventListener('drop', imgLocal.handleFileSelect, false);
 
+function restableceImg(){
+  if(!arrayX.length || !arrayY.length || posImgCv < 3 ){//comprobamos si el arreglo de puntos esta vacio
+    alert("Seleccionar los puntos X y Y de la región a ampliar");
+   }else{
+    pantalla1.putImageData(arr_Img[0], 0, 0);
+   }
+}
 function bilinealImg(evt: any): void{
    if(!arrayX.length || !arrayY.length || posImgCv < 3 ){//comprobamos si el arreglo de puntos esta vacio
     alert("Seleccionar los puntos X y Y de la región a ampliar");
@@ -74,8 +78,7 @@ function bilinealImg(evt: any): void{
     imagenSal.imageArray2DtoData(pantalla2, MathImg.bilineal(imagenSal, arrayX, arrayY));
 
   }
-  
-}
+ }
 function borrarCanvas(){
   posImgCv --;
   arr_Img.pop();
@@ -90,3 +93,4 @@ document.getElementById("op-dibPtn").addEventListener('click', dibujarPuntos, fa
 document.getElementById("op-borrarcnv").addEventListener('click', borrarCanvas, false);
 document.getElementById("op-bilineal").addEventListener('click', bilinealImg, false);
 document.getElementById("op-limpiarcanvas").addEventListener('click', limpiarCanvas, false);
+document.getElementById("op-restabImg").addEventListener('click', restableceImg, false);
