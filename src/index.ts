@@ -43,23 +43,22 @@ imgLocal.getImage().onload = imgLocal.onload;
 function puntosRec(evt: any): void{
   let posicionX:number = evt.offsetX;
   let posicionY: number = evt.offsetY;
-  let groSor = 6;
-  console.log(arr_Img);
-  console.log(posImgCv);                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               
-  pantalla1.fillRect(posicionX,posicionY,groSor,groSor);
-  console.log(posicionX);
-  console.log(posicionY); 
+  
   arr_Img.push(pantalla1.getImageData(0, 0, DefaultSettings.SIZE_WIDTH, DefaultSettings.SIZE_HEIGHT));
   posImgCv ++;
-  //console.log(arr_Img);
-  //console.log(posImgCv);
+  let groSor = 6;                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        
+  pantalla1.fillRect(posicionX,posicionY,groSor,groSor);
+  arr_Img.push(pantalla1.getImageData(0, 0, DefaultSettings.SIZE_WIDTH, DefaultSettings.SIZE_HEIGHT));
+  posImgCv ++;
   arrayX.push(posicionX);
   arrayY.push(posicionY);
 
 }
 
+function dibujarPuntos(){
+  lienzo1.addEventListener("mousedown", puntosRec);
+}
 
-lienzo1.addEventListener("mousedown", puntosRec);
 
 document.getElementById('files').addEventListener('change', imgLocal.handleFileSelect, false);
 //document.getElementById('files2').addEventListener('change', imgLocal4.handleFileSelect, false);
@@ -67,16 +66,9 @@ dropZone.addEventListener('dragover', handleDragOver, false);
 dropZone.addEventListener('drop', imgLocal.handleFileSelect, false);
 
 function bilinealImg(evt: any): void{
- 
-  if(!arrayX.length || !arrayY.length || posImgCv < 3 ){//comprobamos si el arreglo de puntos esta vacio
+   if(!arrayX.length || !arrayY.length || posImgCv < 3 ){//comprobamos si el arreglo de puntos esta vacio
     alert("Seleccionar los puntos X y Y de la región a ampliar");
-   /* pantalla1.font ='12px Cambria Math';
-    pantalla1.fillText('x1, y1', 10,10);
-    pantalla1.fillText('X2, Y2', 423,10);
-    pantalla1.font ='12px Arial';
-    pantalla1.fillText('X3, Y3', 423,269);
-    pantalla1.fillText('X4, Y4', 10,269);*/
- 
+    
    }else{
     var imagenSal: ImageType = new ImageType(pantalla1, imgLocal.getImage());
     imagenSal.imageArray2DtoData(pantalla2, MathImg.bilineal(imagenSal, arrayX, arrayY));
@@ -84,14 +76,17 @@ function bilinealImg(evt: any): void{
   }
   
 }
-function borrarCanvas(evt: any): void{
+function borrarCanvas(){
   posImgCv --;
   arr_Img.pop();
-  console.log(arr_Img);
-  console.log(posImgCv);
   pantalla1.putImageData(arr_Img[posImgCv], 0, 0);
 }
+function limpiarCanvas(){
+  pantalla1.clearRect(0, 0, DefaultSettings.SIZE_WIDTH, DefaultSettings.SIZE_HEIGHT);
+  pantalla2.clearRect(0, 0, DefaultSettings.SIZE_WIDTH, DefaultSettings.SIZE_HEIGHT);
+}
 
-//geometrica
+document.getElementById("op-dibPtn").addEventListener('click', dibujarPuntos, false);
 document.getElementById("op-borrarcnv").addEventListener('click', borrarCanvas, false);
 document.getElementById("op-bilineal").addEventListener('click', bilinealImg, false);
+document.getElementById("op-limpiarcanvas").addEventListener('click', limpiarCanvas, false);

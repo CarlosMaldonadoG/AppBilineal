@@ -7,53 +7,44 @@
     <link rel="stylesheet" href="estilos/index.css">
 </head>
 <body>
-    <section class="container">
-        <header class="header">
-            <ul class="nav">
-                <li><span>Inicio</span>
-                    <ul>           
-                        <li><label for="files" > Abrir archvivo</label></li>
-                        
-                    </ul>
-                </li>
-                
-                
-                
-                <li><span>Op Nuevas</span>
-                    <ul>
-                        <li><span id="op-bilineal">Op Bilineal</span></li>
-                        <li><span id="op-borrarcnv">Borrar punto</span></li>
-                    </ul>
-                </li>
-                
-                
-            </ul>
-        </header>
-        <section class="img-container1">Imagen 1
+    <div class="container">
+        <div class="header">
+           <h1>Universidad Autónoma Benito Juárez de Oaxaca</h1>
+        </div>
+        <div class="botones">
+            <div class="btn-item">
+                <button id="op-dibPtn" type="button" class="botonn1">Dibujar Puntos</button>
+            </div>
+            <div class="btn-item">
+                <button  id="op-borrarcnv" type="button" class="botonn2">Borrar Punto</button>
+            </div>
+            <div class="btn-item">
+                <button id="op-bilineal" type="button" class="botonn3">Transformación</button>
+            </div>
+            <div class="btn-item">
+                <button id="op-limpiarcanvas" type="button" class="botonn4">Limpiar Canvas</button>
+            </div>
+        </div>
+        <div class="img-container1">Imagen de entrada
             <div class="item img-item">
                 <canvas id="img1" width="463" height="279" crossorigin="anonymous"> </canvas>
             </div>
-            <div id="item">
-                <a href="" id="color"> </a> <output id="rgb">RGB:</output>
-            </div>
+            
             <div class="item">
                 <input type="file" id="files" name="files" />
             </div>
             <div class="item">
                 <output id="list"></output>
             </div>
-        </section> 
-        <section class="img-container2">Imagen 2
+        </div> 
+        <div class="img-container2">Imagen de salida
             <div class="item img-item">
                 <canvas id="img2" width="463" height="279"> </canvas>
             </div>
-            <!-- <div class="item">
-                <button id="gris">Convertir a gris</button>
-            </div> -->
-        </section>
- 
+        </div>
+        <div class="footer"><h3>Derechos Reservados</h3></div>
        
-    </section>
+    </div>
     <!-- <script src="dist/src/index.js"  type="module"> -->
     <script src="dist/bundle.js" >
     </script>
